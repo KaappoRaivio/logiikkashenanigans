@@ -1,8 +1,27 @@
+import java.util.List;
+import java.util.ArrayList;
+
 public class main {
     public static void main (String args[]) {
-        Item item = new Item("Maito", Item.MAITOTUOTE, 1);
-        System.out.println(item.repr());
+        Kauppalista kauppalista = new Kauppalista(Item.getExamples());
 
+        System.out.println(kauppalista.toString());
+
+    }
+}
+
+class Kauppalista {
+    private List<Item> jutut = new ArrayList<>();
+    private long luomisaika;
+
+    Kauppalista (List<Item> jutut) {
+        this.jutut = jutut;
+        this.luomisaika = System.currentTimeMillis();
+    }
+
+    @Override
+    public String toString () {
+        return "Kauppalista(" + this.jutut.toString() + ", " + this.luomisaika + ")";
     }
 }
 
@@ -26,7 +45,19 @@ class Item {
         // assert tuoteryhmä on cons
     }
 
-    public String repr ()  {
+    @Override
+    public String toString ()  {
         return "Item (" + this.nimi + ", " + this.tuoteryhmä + ", " + this.määrä + ")";
+    }
+
+    public static List<Item> getExamples () {
+        List<Item> temp = new ArrayList<>();
+
+        temp.add(new Item("Maito", Item.MAITOTUOTE, 1));
+        temp.add(new Item("Kinkku", Item.LIHATUOTE, 1));
+        temp.add(new Item("Juusto", Item.MAITOTUOTE, 1));
+        temp.add(new Item("Omenat", Item.HEVI, 1));
+
+        return temp;
     }
 }
